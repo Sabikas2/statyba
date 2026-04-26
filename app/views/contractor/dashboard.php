@@ -1,0 +1,3 @@
+<h2>Rangovo dashboard</h2><a class="btn" href="<?= url('contractor.profile') ?>">Redaguoti profilį</a>
+<h3>Kvietimai</h3><table><tr><th>Projektas</th><th>Miestas</th><th>Status</th><th></th></tr><?php foreach($invites as $i): ?><tr><td><?= e($i['title']) ?></td><td><?= e($i['city']) ?></td><td><?= e($i['status']) ?></td><td><a href="<?= url('invite.view') ?>&token=<?= e($i['invite_token']) ?>">Atidaryti</a></td></tr><?php endforeach; ?></table>
+<h3>Mano pasiūlymai</h3><table><tr><th>Projektas</th><th>Kaina</th><th>Status</th></tr><?php foreach($bids as $b): ?><tr><td>#<?= (int)$b['project_id'] ?></td><td><?= e((string)$b['price']) ?></td><td><?= e($b['status']) ?></td></tr><?php endforeach; ?></table>
