@@ -23,6 +23,7 @@
         <strong>STATYBA PRO</strong>
         <div>
             <a href="<?= \App\Core\Url::to('/') ?>" style="color:white;margin-right:10px;">Pagrindinis</a>
+            <a href="<?= \App\Core\Url::route('contractor.search') ?>" style="color:white;margin-right:10px;">Rangovų paieška</a>
             <?php if (!empty($_SESSION['user'])): ?>
                 <a href="<?= \App\Core\Url::route('logout') ?>" style="color:white;">Atsijungti</a>
             <?php else: ?>

@@ -1,4 +1,10 @@
 <div class="card">
+    <h2>Rangovų paieška iš išorės</h2>
+    <p>Vieša paieška be prisijungimo:</p>
+    <a href="<?= \App\Core\Url::route('contractor.search') ?>">Atidaryti viešą rangovų paiešką</a>
+</div>
+
+<div class="card">
     <h1>Statybų platforma: klientai, rangovai ir administravimas</h1>
     <p>Veikianti platforma su rolėmis, užklausomis, paieška ir reklamos monetizacija.</p>
 </div>

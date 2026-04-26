@@ -18,6 +18,8 @@ php -S localhost:8080 -t public
 
 Atidarykite `http://localhost:8080`.
 
+Vieša (išorinė) rangovų paieška: `/?route=contractor.search`.
+
 Numatytas admin:
 - Email: `admin@statyba.lt`
 - Slaptažodis: `Admin123!`

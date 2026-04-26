@@ -30,6 +30,7 @@ final class Router
             'logout' => $auth->logout(),
 
             'ad.click' => $home->adClick(),
+            'contractor.search' => $home->contractorSearch(),
             'health' => $system->health(),
             'queue.process' => $system->processQueue(),
 

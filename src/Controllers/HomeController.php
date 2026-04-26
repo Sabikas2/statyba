@@ -8,6 +8,7 @@ use App\Core\Session;
 use App\Core\Url;
 use App\Core\View;
 use App\Repositories\AdRepository;
+use App\Repositories\UserRepository;
 
 final class HomeController
 {
@@ -18,6 +19,22 @@ final class HomeController
         $repo->registerImpressions($ads);
 
         View::render('home/index', ['ads' => $ads]);
+    }
+
+    public function contractorSearch(): void
+    {
+        $q = trim($_GET['q'] ?? '');
+        $city = trim($_GET['city'] ?? '');
+        $speciality = trim($_GET['speciality'] ?? '');
+
+        $contractors = (new UserRepository())->allApprovedContractors($q, $city, $speciality);
+
+        View::render('home/contractor_search', [
+            'contractors' => $contractors,
+            'q' => $q,
+            'city' => $city,
+            'speciality' => $speciality,
+        ]);
     }
 
     public function adClick(): void
