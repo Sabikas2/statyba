@@ -6,6 +6,8 @@ namespace App\Controllers;
 
 use App\Core\Auth;
 use App\Core\View;
+use App\Core\Url;
+use App\Core\Session;
 use App\Repositories\InquiryRepository;
 use App\Repositories\ProjectRepository;
 use App\Repositories\UserRepository;
@@ -35,15 +37,26 @@ final class ClientController
     public function createProject(): void
     {
         Auth::requireRole('client');
+        $title = trim($_POST['title'] ?? '');
+        $description = trim($_POST['description'] ?? '');
+        $city = trim($_POST['city'] ?? '');
+        $budget = (float)($_POST['budget'] ?? 0);
+
+        if ($title === '' || $description === '' || $city === '' || $budget <= 0) {
+            Session::flash('Neteisingi projekto duomenys.');
+            header('Location: ' . Url::route('client.dashboard'));
+            exit;
+        }
+
         (new ProjectRepository())->create(
             (int)Auth::user()['id'],
-            trim($_POST['title'] ?? ''),
-            trim($_POST['description'] ?? ''),
-            trim($_POST['city'] ?? ''),
-            (float)($_POST['budget'] ?? 0)
+            $title,
+            $description,
+            $city,
+            $budget
         );
 
-        header('Location: /?route=client.dashboard');
+        header('Location: ' . Url::route('client.dashboard'));
         exit;
     }
 
@@ -51,12 +64,19 @@ final class ClientController
     {
         Auth::requireRole('client');
 
+        $message = trim($_POST['message'] ?? '');
+        if ($message === '') {
+            Session::flash('Užklausos tekstas negali būti tuščias.');
+            header('Location: ' . Url::route('client.dashboard'));
+            exit;
+        }
+
         $inquiryRepo = new InquiryRepository();
         $inquiryRepo->create(
             (int)($_POST['project_id'] ?? 0),
             (int)Auth::user()['id'],
             (int)($_POST['contractor_id'] ?? 0),
-            trim($_POST['message'] ?? '')
+            $message
         );
 
         $userRepo = new UserRepository();
@@ -72,11 +92,11 @@ final class ClientController
             (new EmailService())->enqueue(
                 $contractor['email'],
                 'Nauja užklausa iš statyba platformos',
-                "Klientas " . Auth::user()['name'] . " atsiuntė užklausą: " . trim($_POST['message'] ?? '')
+                "Klientas " . Auth::user()['name'] . " atsiuntė užklausą: " . $message
             );
         }
 
-        header('Location: /?route=client.dashboard');
+        header('Location: ' . Url::route('client.dashboard'));
         exit;
     }
 }

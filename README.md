@@ -6,6 +6,9 @@ Pilnai perrašyta (nuo nulio) platformos versija su:
 - užklausų siuntimu rangovams,
 - automatizuotu el. laiškų queue mechanizmu,
 - reklamos kampanijų kūrimu ir admin patvirtinimu (monetizacija).
+- CSRF apsauga visoms POST formoms.
+- bazinio URL adaptacija (veikia ir kai app paleista per /public/).
+- reklamos paspaudimų / parodymų sekimas su baziniais KPI (CTR, estimated spend).
 
 ## Greitas paleidimas (lokaliai)
 
@@ -52,3 +55,10 @@ Pirmas atidarymas paleis migracijas automatiškai.
 ## Pastabos
 - `mail()` funkcija Hostinger aplinkoje dažniausiai veikia. Jei ne – laiškai saugomi `storage/emails.log`.
 - Rangovo paskyra prisijungti galės tik po admin patvirtinimo.
+
+
+### Service route
+- Health check: `/?route=health`
+- Queue cron endpoint: `/?route=queue.process&key=YOUR_QUEUE_SECRET`
+
+Rekomenduojama Hostinger cron užduotyje kviesti queue route kas 1-5 minutes.

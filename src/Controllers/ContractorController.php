@@ -6,6 +6,8 @@ namespace App\Controllers;
 
 use App\Core\Auth;
 use App\Core\View;
+use App\Core\Url;
+use App\Core\Session;
 use App\Repositories\AdRepository;
 use App\Repositories\InquiryRepository;
 use App\Repositories\UserRepository;
@@ -29,14 +31,24 @@ final class ContractorController
     {
         Auth::requireRole('contractor');
 
+        $profileText = trim($_POST['profile_text'] ?? '');
+        $city = trim($_POST['city'] ?? '');
+        $speciality = trim($_POST['speciality'] ?? '');
+
+        if ($profileText === '' || $city === '' || $speciality === '') {
+            Session::flash('Profilio laukai negali būti tušti.');
+            header('Location: ' . Url::route('contractor.dashboard'));
+            exit;
+        }
+
         (new UserRepository())->updateContractorProfile(
             (int)Auth::user()['id'],
-            trim($_POST['profile_text'] ?? ''),
-            trim($_POST['city'] ?? ''),
-            trim($_POST['speciality'] ?? '')
+            $profileText,
+            $city,
+            $speciality
         );
 
-        header('Location: /?route=contractor.dashboard');
+        header('Location: ' . Url::route('contractor.dashboard'));
         exit;
     }
 
@@ -44,14 +56,24 @@ final class ContractorController
     {
         Auth::requireRole('contractor');
 
+        $title = trim($_POST['title'] ?? '');
+        $description = trim($_POST['description'] ?? '');
+        $dailyBudget = (float)($_POST['daily_budget'] ?? 0);
+
+        if ($title === '' || $description === '' || $dailyBudget <= 0) {
+            Session::flash('Neteisingi reklamos duomenys.');
+            header('Location: ' . Url::route('contractor.dashboard'));
+            exit;
+        }
+
         (new AdRepository())->create(
             (int)Auth::user()['id'],
-            trim($_POST['title'] ?? ''),
-            trim($_POST['description'] ?? ''),
-            (float)($_POST['daily_budget'] ?? 0)
+            $title,
+            $description,
+            $dailyBudget
         );
 
-        header('Location: /?route=contractor.dashboard');
+        header('Location: ' . Url::route('contractor.dashboard'));
         exit;
     }
 }

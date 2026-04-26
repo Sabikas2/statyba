@@ -22,18 +22,17 @@
     <div class="wrap">
         <strong>STATYBA PRO</strong>
         <div>
-            <a href="/" style="color:white;margin-right:10px;">Pagrindinis</a>
+            <a href="<?= \App\Core\Url::to('/') ?>" style="color:white;margin-right:10px;">Pagrindinis</a>
             <?php if (!empty($_SESSION['user'])): ?>
-                <a href="/?route=logout" style="color:white;">Atsijungti</a>
+                <a href="<?= \App\Core\Url::route('logout') ?>" style="color:white;">Atsijungti</a>
             <?php else: ?>
-                <a href="/?route=login" style="color:white;margin-right:10px;">Prisijungti</a>
-                <a href="/?route=register" style="color:white;">Registruotis</a>
+                <a href="<?= \App\Core\Url::route('login') ?>" style="color:white;margin-right:10px;">Prisijungti</a>
+                <a href="<?= \App\Core\Url::route('register') ?>" style="color:white;">Registruotis</a>
             <?php endif; ?>
         </div>
     </div>
 </nav>
 <div class="wrap">
-<?php if (!empty($_SESSION['flash'])): ?>
-    <div class="flash"><?= htmlspecialchars($_SESSION['flash']) ?></div>
-    <?php unset($_SESSION['flash']); ?>
+<?php if (($flash = \App\Core\Session::pullFlash()) !== null): ?>
+    <div class="flash"><?= htmlspecialchars($flash) ?></div>
 <?php endif; ?>

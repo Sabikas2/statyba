@@ -11,6 +11,9 @@
                 <h3><?= htmlspecialchars($ad['title']) ?></h3>
                 <p><?= htmlspecialchars($ad['description']) ?></p>
                 <small><?= htmlspecialchars($ad['contractor_name']) ?> · <?= htmlspecialchars($ad['city']) ?> · <?= htmlspecialchars($ad['speciality']) ?></small>
+                <p>
+                    <a href="<?= \App\Core\Url::route('ad.click') . '&id=' . (int)$ad['id'] ?>">Peržiūrėti reklamą</a>
+                </p>
             </div>
         <?php endforeach; ?>
     </div>

@@ -3,7 +3,8 @@
 <div class="grid">
     <div class="card">
         <h3>Profilio redagavimas</h3>
-        <form method="post" action="/?route=contractor.profile.update">
+        <form method="post" action="<?= \App\Core\Url::route('contractor.profile.update') ?>">
+            <input type="hidden" name="_csrf" value="<?= \App\Core\Csrf::token() ?>">
             <input name="city" placeholder="Miestas" required>
             <input name="speciality" placeholder="Specializacija" required>
             <textarea name="profile_text" placeholder="Aprašykite savo patirtį" required></textarea>
@@ -13,7 +14,8 @@
 
     <div class="card">
         <h3>Sukurti reklamos kampaniją (monetizacija)</h3>
-        <form method="post" action="/?route=contractor.ad.create">
+        <form method="post" action="<?= \App\Core\Url::route('contractor.ad.create') ?>">
+            <input type="hidden" name="_csrf" value="<?= \App\Core\Csrf::token() ?>">
             <input name="title" placeholder="Reklamos pavadinimas" required>
             <textarea name="description" placeholder="Reklamos aprašymas" required></textarea>
             <input type="number" step="0.01" name="daily_budget" placeholder="Dienos biudžetas" required>
@@ -36,7 +38,8 @@
     <h3>Mano reklamos</h3>
     <?php foreach ($ads as $ad): ?>
         <div style="border-top:1px solid #e5e7eb;padding-top:10px;margin-top:10px;">
-            <strong><?= htmlspecialchars($ad['title']) ?></strong> · Statusas: <?= htmlspecialchars($ad['status']) ?> · €<?= htmlspecialchars((string)$ad['daily_budget']) ?>/d.
+            <strong><?= htmlspecialchars($ad['title']) ?></strong> · Statusas: <?= htmlspecialchars($ad['status']) ?> · €<?= htmlspecialchars((string)$ad['daily_budget']) ?>/d.<br>
+            <small>Impressions: <?= (int)$ad['impressions'] ?> | Clicks: <?= (int)$ad['clicks'] ?> | CTR: <?= htmlspecialchars((string)$ad['ctr']) ?>% | Est. spend: €<?= htmlspecialchars((string)$ad['estimated_spend']) ?></small>
         </div>
     <?php endforeach; ?>
 </div>
