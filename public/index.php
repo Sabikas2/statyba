@@ -25,7 +25,12 @@ spl_autoload_register(function (string $class): void {
 });
 
 (new MigrationService())->migrate();
-(new EmailService())->processQueue();
+// Automatinis lightweight queue processing tik kartą per 5 min.,
+// production aplinkoje rekomenduojamas cron su route=queue.process&key=...
+if (!isset($_SESSION['_last_queue_run']) || (time() - (int)$_SESSION['_last_queue_run']) > 300) {
+    (new EmailService())->processQueue();
+    $_SESSION['_last_queue_run'] = time();
+}
 
 if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
     if (!Csrf::verify($_POST['_csrf'] ?? null)) {

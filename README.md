@@ -55,3 +55,10 @@ Pirmas atidarymas paleis migracijas automatiškai.
 ## Pastabos
 - `mail()` funkcija Hostinger aplinkoje dažniausiai veikia. Jei ne – laiškai saugomi `storage/emails.log`.
 - Rangovo paskyra prisijungti galės tik po admin patvirtinimo.
+
+
+### Service route
+- Health check: `/?route=health`
+- Queue cron endpoint: `/?route=queue.process&key=YOUR_QUEUE_SECRET`
+
+Rekomenduojama Hostinger cron užduotyje kviesti queue route kas 1-5 minutes.

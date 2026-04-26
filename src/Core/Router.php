@@ -9,6 +9,7 @@ use App\Controllers\AuthController;
 use App\Controllers\ClientController;
 use App\Controllers\ContractorController;
 use App\Controllers\HomeController;
+use App\Controllers\SystemController;
 
 final class Router
 {
@@ -19,6 +20,7 @@ final class Router
         $client = new ClientController();
         $contractor = new ContractorController();
         $admin = new AdminController();
+        $system = new SystemController();
 
         match ($route) {
             'register' => $auth->register(),
@@ -28,6 +30,8 @@ final class Router
             'logout' => $auth->logout(),
 
             'ad.click' => $home->adClick(),
+            'health' => $system->health(),
+            'queue.process' => $system->processQueue(),
 
             'client.dashboard' => $client->dashboard(),
             'client.project.create' => $client->createProject(),

@@ -76,7 +76,7 @@ final class ClientController
             (int)($_POST['project_id'] ?? 0),
             (int)Auth::user()['id'],
             (int)($_POST['contractor_id'] ?? 0),
-$message
+            $message
         );
 
         $userRepo = new UserRepository();
