@@ -45,6 +45,7 @@ final class ClientController
         );
 
         header('Location: ' . Url::route('client.dashboard'));
+        header('Location: /?route=client.dashboard');
         exit;
     }
 
@@ -78,6 +79,7 @@ final class ClientController
         }
 
         header('Location: ' . Url::route('client.dashboard'));
+        header('Location: /?route=client.dashboard');
         exit;
     }
 }

@@ -4,6 +4,7 @@
     <div class="card">
         <h3>Naujas projektas</h3>
         <form method="post" action="<?= \App\Core\Url::route('client.project.create') ?>">
+        <form method="post" action="/?route=client.project.create">
             <input name="title" placeholder="Projekto pavadinimas" required>
             <textarea name="description" placeholder="Aprašymas" required></textarea>
             <input name="city" placeholder="Miestas" required>
@@ -15,6 +16,7 @@
     <div class="card">
         <h3>Rangovų paieška (automatinė)</h3>
         <form method="get" action="<?= \App\Core\Url::to('/') ?>">
+        <form method="get" action="/">
             <input type="hidden" name="route" value="client.dashboard">
             <input name="q" placeholder="Raktažodis" value="<?= htmlspecialchars($_GET['q'] ?? '') ?>">
             <input name="city" placeholder="Miestas" value="<?= htmlspecialchars($_GET['city'] ?? '') ?>">
@@ -42,6 +44,7 @@
             <p><?= htmlspecialchars($contractor['profile_text'] ?? '') ?></p>
             <?php if (!empty($projects)): ?>
                 <form method="post" action="<?= \App\Core\Url::route('client.inquiry.send') ?>">
+                <form method="post" action="/?route=client.inquiry.send">
                     <input type="hidden" name="contractor_id" value="<?= (int)$contractor['id'] ?>">
                     <select name="project_id">
                         <?php foreach ($projects as $project): ?>

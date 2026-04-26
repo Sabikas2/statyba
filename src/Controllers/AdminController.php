@@ -27,6 +27,7 @@ final class AdminController
         Auth::requireRole('admin');
         (new UserRepository())->approveContractor((int)($_POST['user_id'] ?? 0));
         header('Location: ' . Url::route('admin.dashboard'));
+        header('Location: /?route=admin.dashboard');
         exit;
     }
 
@@ -35,6 +36,7 @@ final class AdminController
         Auth::requireRole('admin');
         (new AdRepository())->approve((int)($_POST['ad_id'] ?? 0));
         header('Location: ' . Url::route('admin.dashboard'));
+        header('Location: /?route=admin.dashboard');
         exit;
     }
 }

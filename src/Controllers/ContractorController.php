@@ -38,6 +38,7 @@ final class ContractorController
         );
 
         header('Location: ' . Url::route('contractor.dashboard'));
+        header('Location: /?route=contractor.dashboard');
         exit;
     }
 
@@ -53,6 +54,7 @@ final class ContractorController
         );
 
         header('Location: ' . Url::route('contractor.dashboard'));
+        header('Location: /?route=contractor.dashboard');
         exit;
     }
 }

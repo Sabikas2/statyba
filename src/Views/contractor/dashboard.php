@@ -14,6 +14,7 @@
     <div class="card">
         <h3>Sukurti reklamos kampaniją (monetizacija)</h3>
         <form method="post" action="<?= \App\Core\Url::route('contractor.ad.create') ?>">
+        <form method="post" action="/?route=contractor.ad.create">
             <input name="title" placeholder="Reklamos pavadinimas" required>
             <textarea name="description" placeholder="Reklamos aprašymas" required></textarea>
             <input type="number" step="0.01" name="daily_budget" placeholder="Dienos biudžetas" required>

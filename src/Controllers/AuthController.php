@@ -29,6 +29,7 @@ final class AuthController
         ]);
 
         header('Location: ' . Url::route('login'));
+        header('Location: /?route=login');
         exit;
     }
 
@@ -45,17 +46,20 @@ final class AuthController
         if (!$user || !password_verify($_POST['password'] ?? '', $user['password_hash'])) {
             $_SESSION['flash'] = 'Neteisingas el. paštas arba slaptažodis.';
             header('Location: ' . Url::route('login'));
+            header('Location: /?route=login');
             exit;
         }
 
         if ($user['role'] === 'contractor' && (int)$user['approved'] !== 1) {
             $_SESSION['flash'] = 'Jūsų rangovo profilis dar nepatvirtintas admin.';
             header('Location: ' . Url::route('login'));
+            header('Location: /?route=login');
             exit;
         }
 
         Auth::attempt($user);
         header('Location: ' . Url::route($user['role'] . '.dashboard'));
+        header('Location: /?route=' . $user['role'] . '.dashboard');
         exit;
     }
 
@@ -63,6 +67,7 @@ final class AuthController
     {
         Auth::logout();
         header('Location: ' . Url::to('/'));
+        header('Location: /');
         exit;
     }
 }

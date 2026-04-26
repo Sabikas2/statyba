@@ -28,6 +28,12 @@
             <?php else: ?>
                 <a href="<?= \App\Core\Url::route('login') ?>" style="color:white;margin-right:10px;">Prisijungti</a>
                 <a href="<?= \App\Core\Url::route('register') ?>" style="color:white;">Registruotis</a>
+            <a href="/" style="color:white;margin-right:10px;">Pagrindinis</a>
+            <?php if (!empty($_SESSION['user'])): ?>
+                <a href="/?route=logout" style="color:white;">Atsijungti</a>
+            <?php else: ?>
+                <a href="/?route=login" style="color:white;margin-right:10px;">Prisijungti</a>
+                <a href="/?route=register" style="color:white;">Registruotis</a>
             <?php endif; ?>
         </div>
     </div>
