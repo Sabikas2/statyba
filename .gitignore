@@ -1,0 +1,5 @@
+/vendor/
+/.env
+/storage/*.sqlite
+/storage/email_queue.json
+/storage/emails.log
