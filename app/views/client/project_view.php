@@ -1,0 +1,7 @@
+<h2><?= e($project['title']) ?></h2>
+<p>Statusas: <span class="badge"><?= e($project['status']) ?></span></p>
+<?php if(current_user()['role']==='admin'): ?><form method="post" action="<?= url('notifications.send_invites') ?>"><?= csrf_field() ?><input type="hidden" name="project_id" value="<?= (int)$project['id'] ?>"><button class="btn">Auto parinkti rangovus ir siųsti kvietimus</button></form><?php endif; ?>
+<h3>Pakviesti rangovai</h3><table><tr><th>Įmonė</th><th>Email</th><th>Status</th></tr><?php foreach($invites as $i): ?><tr><td><?= e($i['company_name']) ?></td><td><?= e($i['email']) ?></td><td><?= e($i['status']) ?></td></tr><?php endforeach; ?></table>
+<h3>Pasiūlymai</h3><table><tr><th>Įmonė</th><th>Kaina</th><th>Trukmė</th><th>Indikatorius</th><th></th></tr><?php foreach($stats['rows'] as $b): ?><tr><td><?= e($b['company_name']) ?></td><td><?= e((string)$b['price']) ?></td><td><?= (int)$b['duration_days'] ?> d.</td><td><?= e($b['indicator']) ?></td><td><?php if(current_user()['role']==='client'): ?><form method="post" action="<?= url('project.select_contractor') ?>"><?= csrf_field() ?><input type="hidden" name="project_id" value="<?= (int)$project['id'] ?>"><input type="hidden" name="bid_id" value="<?= (int)$b['id'] ?>"><button>Pasirinkti</button></form><?php endif; ?></td></tr><?php endforeach; ?></table>
+<p>Min: <?= e((string)$stats['min']) ?> | Max: <?= e((string)$stats['max']) ?> | Avg: <?= e((string)$stats['avg']) ?> | Median: <?= e((string)$stats['median']) ?></p>
+<div class="card"><strong>AI analizė:</strong> <?= e($analysis) ?></div>

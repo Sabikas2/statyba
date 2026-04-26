@@ -1,0 +1,2 @@
+<h2>Vartotojai</h2><table><tr><th>ID</th><th>Vardas</th><th>Email</th><th>Rolė</th><th>Status</th><th></th></tr>
+<?php foreach($users as $u): ?><tr><td><?= (int)$u['id'] ?></td><td><?= e($u['name']) ?></td><td><?= e($u['email']) ?></td><td><?= e($u['role']) ?></td><td><?= e($u['status']) ?></td><td><form method="post"><?= csrf_field() ?><input type="hidden" name="id" value="<?= (int)$u['id'] ?>"><select name="status"><option>active</option><option>blocked</option><option>pending</option></select><button>Save</button></form></td></tr><?php endforeach; ?></table>
