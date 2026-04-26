@@ -3,7 +3,7 @@
 <div class="grid">
     <div class="card">
         <h3>Profilio redagavimas</h3>
-        <form method="post" action="/?route=contractor.profile.update">
+        <form method="post" action="<?= \App\Core\Url::route('contractor.profile.update') ?>">
             <input name="city" placeholder="Miestas" required>
             <input name="speciality" placeholder="Specializacija" required>
             <textarea name="profile_text" placeholder="Aprašykite savo patirtį" required></textarea>
@@ -13,6 +13,7 @@
 
     <div class="card">
         <h3>Sukurti reklamos kampaniją (monetizacija)</h3>
+        <form method="post" action="<?= \App\Core\Url::route('contractor.ad.create') ?>">
         <form method="post" action="/?route=contractor.ad.create">
             <input name="title" placeholder="Reklamos pavadinimas" required>
             <textarea name="description" placeholder="Reklamos aprašymas" required></textarea>

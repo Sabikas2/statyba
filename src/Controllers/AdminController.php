@@ -6,6 +6,7 @@ namespace App\Controllers;
 
 use App\Core\Auth;
 use App\Core\View;
+use App\Core\Url;
 use App\Repositories\AdRepository;
 use App\Repositories\UserRepository;
 
@@ -25,6 +26,7 @@ final class AdminController
     {
         Auth::requireRole('admin');
         (new UserRepository())->approveContractor((int)($_POST['user_id'] ?? 0));
+        header('Location: ' . Url::route('admin.dashboard'));
         header('Location: /?route=admin.dashboard');
         exit;
     }
@@ -33,6 +35,7 @@ final class AdminController
     {
         Auth::requireRole('admin');
         (new AdRepository())->approve((int)($_POST['ad_id'] ?? 0));
+        header('Location: ' . Url::route('admin.dashboard'));
         header('Location: /?route=admin.dashboard');
         exit;
     }

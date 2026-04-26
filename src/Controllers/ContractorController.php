@@ -6,6 +6,7 @@ namespace App\Controllers;
 
 use App\Core\Auth;
 use App\Core\View;
+use App\Core\Url;
 use App\Repositories\AdRepository;
 use App\Repositories\InquiryRepository;
 use App\Repositories\UserRepository;
@@ -36,6 +37,7 @@ final class ContractorController
             trim($_POST['speciality'] ?? '')
         );
 
+        header('Location: ' . Url::route('contractor.dashboard'));
         header('Location: /?route=contractor.dashboard');
         exit;
     }
@@ -51,6 +53,7 @@ final class ContractorController
             (float)($_POST['daily_budget'] ?? 0)
         );
 
+        header('Location: ' . Url::route('contractor.dashboard'));
         header('Location: /?route=contractor.dashboard');
         exit;
     }

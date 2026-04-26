@@ -1,5 +1,6 @@
 <div class="card">
     <h2>Registracija</h2>
+    <form method="post" action="<?= \App\Core\Url::route('register.submit') ?>">
     <form method="post" action="/?route=register.submit">
         <label>Vardas</label>
         <input name="name" required>

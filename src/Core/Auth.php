@@ -30,6 +30,7 @@ final class Auth
     {
         $roles = (array)$roles;
         if (!self::check() || !in_array($_SESSION['user']['role'], $roles, true)) {
+            header('Location: ' . Url::route('login'));
             header('Location: /?route=login');
             exit;
         }
