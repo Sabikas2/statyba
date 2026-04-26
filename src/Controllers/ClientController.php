@@ -6,7 +6,6 @@ namespace App\Controllers;
 
 use App\Core\Auth;
 use App\Core\View;
-use App\Core\Url;
 use App\Repositories\InquiryRepository;
 use App\Repositories\ProjectRepository;
 use App\Repositories\UserRepository;
@@ -44,7 +43,6 @@ final class ClientController
             (float)($_POST['budget'] ?? 0)
         );
 
-        header('Location: ' . Url::route('client.dashboard'));
         header('Location: /?route=client.dashboard');
         exit;
     }
@@ -78,7 +76,6 @@ final class ClientController
             );
         }
 
-        header('Location: ' . Url::route('client.dashboard'));
         header('Location: /?route=client.dashboard');
         exit;
     }
